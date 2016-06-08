@@ -105,6 +105,50 @@ void swapWithoutSwappingData(struct node** head_ref,int x,int y)
 	curry->next=currx->next;
 	currx->next=temp;
 }
+void countNthFromStart(struct node *head,int index)
+{
+	int count=0;
+	while(head!=NULL)
+	{
+		if(count==index)
+		{
+			cout<<head->data<<endl;
+			return;
+		}
+		count++;
+		head=head->next;
+	}
+	cout<<"not enough nodes in the list"<<endl;
+	return ;
+}
+void countNthFromEnd(struct node* head,int n)
+{
+	struct node *reference=head,*main=head;
+	
+	if(head==NULL)
+	return;
+	
+	int count=0;
+	while(count<n)
+	{
+		if(reference==NULL)
+		{
+			cout<<"not enough nodes in the list"<<endl;
+			return;
+		}
+		reference=reference->next;
+		count++;
+	}
+	while(reference!=NULL)
+	{
+		main=main->next;
+		reference=reference->next;
+	}
+	
+	cout<<main->data<<endl;
+	return ;
+	
+}
 int main()
 {
 	struct node* head=NULL;
