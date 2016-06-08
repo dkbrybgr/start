@@ -68,6 +68,43 @@ bool recSearch(struct node *head,int key)
 	return recSearch(head->next,key);
 	
 }
+void swapWithoutSwappingData(struct node** head_ref,int x,int y)
+{
+	if(x==y)
+	return;
+	
+	struct node *prevx=NULL,*currx= *head_ref;
+	struct node *prevy=NULL,*curry= *head_ref;
+	
+	while(currx!=NULL && currx->data!=x)
+	{
+		prevx=currx;
+		currx=currx->next;
+	}
+	
+	while(curry!=NULL && curry->data!=y)
+	{
+		prevy=curry;
+		curry=curry->next;
+	}
+	
+	if(currx==NULL||curry==NULL)
+	return;
+	
+	if(prevx==NULL)
+	*head_ref=curry;
+	else
+	prevx->next=curry;
+	
+	if(prevy==NULL)
+	*head_ref=currx;
+	else
+	prevy->next=currx;
+	
+	struct node* temp=curry->next;
+	curry->next=currx->next;
+	currx->next=temp;
+}
 int main()
 {
 	struct node* head=NULL;
@@ -83,6 +120,12 @@ int main()
 	delKey(&head,0);
 	cout<<search(head,0)<<endl;
 	cout<<recSearch(head,1)<<endl;
-	
-	
+	push(&head,5);
+	push(&head,2);
+	push(&head,9);
+	printList(head);
+	cout<<endl;
+	swapWithoutSwappingData(&head,1,2);
+	printList(head);
+	cout<<endl;
 }
