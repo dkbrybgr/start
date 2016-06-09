@@ -5,7 +5,22 @@ struct node
 	int data;
 	struct node *next;
 };
-
+void detectLoop(struct node *head)
+{
+	struct node *slow=head,*fast=head;
+	while(slow && fast && fast->next)
+	{
+		if(slow==fast)
+		{
+			cout<<"Loop found\n";
+			return;
+		}
+		slow=slow->next;
+		fast=fast->next->next;
+	}
+	cout<<"No loop\n"<<endl;
+	return;
+}
 void push(struct node **head_ref,int new_data)
 {
 	struct node *new_node=(struct node*)malloc(sizeof(struct node));
